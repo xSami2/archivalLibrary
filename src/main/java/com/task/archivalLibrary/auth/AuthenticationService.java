@@ -1,7 +1,7 @@
 package com.task.archivalLibrary.auth;
 
 import com.task.archivalLibrary.config.JwtService;
-import com.task.archivalLibrary.entity.Role;
+import com.task.archivalLibrary.Enum.Role;
 import com.task.archivalLibrary.entity.User;
 import com.task.archivalLibrary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,13 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,9 +32,9 @@ public class AuthenticationService {
     if (userRepository.existsByUsername(request.getUsername())) {
       return ResponseEntity.badRequest().build();
     }
-    userRepository.save(user);
+   User savedUser = userRepository.save(user);
     String jwtToken = jwtService.generateToken(user);
-    AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken);
+    AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken ,savedUser );
     return ResponseEntity.ok(authenticationResponse);
   }
 
@@ -55,7 +50,7 @@ public class AuthenticationService {
               .findByUsername(request.getUsername())
               .orElseThrow(); // This should ideally be a more specific exception
       var jwtToken = jwtService.generateToken(user);
-      AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken);
+      AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken , user);
 
       return ResponseEntity.ok(authenticationResponse);
 
