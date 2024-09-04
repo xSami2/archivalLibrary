@@ -26,9 +26,9 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
+  @Column(unique = true, nullable = false)
   private String username;
   private String password;
-  private String email;
 
 
   @Enumerated(EnumType.STRING)
