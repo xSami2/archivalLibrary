@@ -28,7 +28,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173") // List specific allowed origins
+                .allowedOrigins("http://localhost:5173" ,"http://localhost:5174" ) // List specific allowed origins
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type" , "Accept"); // Allow specific headers
     }
@@ -41,7 +41,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/auth/**" , "/theArchivalLibrary/v1/file/**" , "/h2-console/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

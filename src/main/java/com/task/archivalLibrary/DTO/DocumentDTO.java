@@ -7,11 +7,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class DocumentDTO {
 
 
+    private String uuid;
     private String title;
     private String author;
+    private UserDTO user;
     private String description;
     private String dataOfPublication;
-    private MultipartFile file;
+    private String filePath;
 
 
 }

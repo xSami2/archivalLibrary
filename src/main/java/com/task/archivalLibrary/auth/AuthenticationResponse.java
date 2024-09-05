@@ -1,6 +1,7 @@
 package com.task.archivalLibrary.auth;
 
 
+import com.task.archivalLibrary.DTO.UserDTO;
 import com.task.archivalLibrary.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 
     public String token;
-    public User user;
+    public UserDTO userDTO;
 
 }

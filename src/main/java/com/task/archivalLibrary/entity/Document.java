@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class Document {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String uuid ;
 
     @Column(nullable = false, length = 255)
     private String title;

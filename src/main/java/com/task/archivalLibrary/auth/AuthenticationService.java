@@ -1,5 +1,6 @@
 package com.task.archivalLibrary.auth;
 
+import com.task.archivalLibrary.DTO.UserDTO;
 import com.task.archivalLibrary.config.JwtService;
 import com.task.archivalLibrary.Enum.Role;
 import com.task.archivalLibrary.entity.User;
@@ -34,7 +35,10 @@ public class AuthenticationService {
     }
    User savedUser = userRepository.save(user);
     String jwtToken = jwtService.generateToken(user);
-    AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken ,savedUser );
+    UserDTO userDTO = new UserDTO();
+    userDTO.setUsername(savedUser.getUsername());
+    userDTO.setUserId(savedUser.getId());
+    AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken ,userDTO);
     return ResponseEntity.ok(authenticationResponse);
   }
 
@@ -50,7 +54,10 @@ public class AuthenticationService {
               .findByUsername(request.getUsername())
               .orElseThrow(); // This should ideally be a more specific exception
       var jwtToken = jwtService.generateToken(user);
-      AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken , user);
+      UserDTO userDTO = new UserDTO();
+      userDTO.setUsername(user.getUsername());
+      userDTO.setUserId(user.getId());
+      AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwtToken , userDTO);
 
       return ResponseEntity.ok(authenticationResponse);
 
