@@ -1,0 +1,34 @@
+version: '3'
+services:
+  frontend:
+    image: react-app
+    ports:
+      - "5173:5173"
+    networks:
+      - network-backend
+  backend:
+    image: my-backend-image
+    ports:
+      - "9091:9091"
+    environment:
+      - SPRING_PROFILES_ACTIVE=DEV
+      - FILES_PATH=src/main/resources
+    depends_on:
+      - db
+    networks:
+      - network-backend
+
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: TheArchivalLibrary
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    networks:
+      - network-backend
+
+networks:
+  network-backend:
