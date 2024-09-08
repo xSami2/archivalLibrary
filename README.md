@@ -29,7 +29,7 @@ The application is divided into two main components:
 ## Installation
 
 
-```git
+```bash
 git clone https://github.com/xSami2/archivalLibrary-frontend.git
 
 git clone https://github.com/xSami2/archivalLibrary.git
@@ -43,7 +43,7 @@ Now for Building the Image make sure you have docker installed in your Device
  cd archivalLibrary-frontend
 ```
 
-Install All Depdency 
+Install All Dependency 
 
 ```cmd
  npm i
@@ -88,11 +88,16 @@ try access http://localhost:5173
 **Expected Result**: The user can login with his username and password and confirmation message is displayed.
 
 - __Test Case 3: Upload Document without metadata__
+  
 **Expected Result**: The Appliction will inform the user about the required information and will not allow the user to upload the documents.
 - __Test Case 4: Upload Document with metadata__
+  
 **Expected Result**: The Appliction will allow the user to upload the file and will show in the table
 - __Test Case 5: Download Document__
-**Expected Result**: The Appliction will Download the file for the user 
+  
+**Expected Result**: The Appliction will Download the file for the user
+ 
 - __Test Case 6: Delete Document__
+  
 **Expected Result**: The Appliction will delete the appliction from the server and from the database for the user 
 
