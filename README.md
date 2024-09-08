@@ -23,6 +23,7 @@ The application is divided into two main components:
  - react-router-dom
 
  ## Database Schema
+![image](https://github.com/user-attachments/assets/f66e197a-a830-48d0-9e76-cfcbbe2a8a0c)
 
 
 ## Installation
