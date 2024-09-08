@@ -3,7 +3,8 @@ package com.task.archivalLibrary.config;
 
 import com.task.archivalLibrary.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     private final UserRepository usersRepository;
+
+    @Value("${FILES_PATH}")
+    private   String fileLocation ;
+
+
+
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -44,6 +51,20 @@ public class ApplicationConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean(name = "fileLocation")
+    public String getFileLocation() {
+        return fileLocation;
+    }
+
+
+
+
 
 
 }

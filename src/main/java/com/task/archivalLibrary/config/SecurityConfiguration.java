@@ -1,14 +1,12 @@
 package com.task.archivalLibrary.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,23 +23,26 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     private final AuthenticationProvider authenticationProvider;
 
 
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173" ,"http://localhost:5174" ) // List specific allowed origins
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("Authorization", "Content-Type" , "Accept"); // Allow specific headers
+    registry
+        .addMapping("/**")
+         .allowedOrigins("http://localhost" , "http://localhost/" , "http://localhost:80")  // Adjust this to your frontend origin
+        .allowedMethods("*")
+        .allowedHeaders("*");
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
                 .cors()
                 .and()
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/auth/**" , "/theArchivalLibrary/v1/file/**" , "/h2-console/**")
+                .requestMatchers("theArchivalLibrary/v1/auth/register" , "theArchivalLibrary/v1/auth/login" )
                 .permitAll()
                 .anyRequest()
                 .authenticated()

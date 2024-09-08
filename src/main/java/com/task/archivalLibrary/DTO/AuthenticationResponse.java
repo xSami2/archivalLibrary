@@ -1,8 +1,6 @@
-package com.task.archivalLibrary.auth;
+package com.task.archivalLibrary.DTO;
 
 
-import com.task.archivalLibrary.DTO.UserDTO;
-import com.task.archivalLibrary.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

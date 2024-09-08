@@ -1,6 +1,9 @@
-package com.task.archivalLibrary.auth;
+package com.task.archivalLibrary.service;
 
 import com.task.archivalLibrary.DTO.UserDTO;
+import com.task.archivalLibrary.DTO.AuthenticationRequest;
+import com.task.archivalLibrary.DTO.AuthenticationResponse;
+import com.task.archivalLibrary.DTO.RegisterRequest;
 import com.task.archivalLibrary.config.JwtService;
 import com.task.archivalLibrary.Enum.Role;
 import com.task.archivalLibrary.entity.User;
@@ -44,15 +47,13 @@ public class AuthenticationService {
 
   public ResponseEntity<AuthenticationResponse> authenticate(AuthenticationRequest request) {
     try {
-      // Attempt to authenticate the user
       authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-      // If authentication is successful, fetch the user and generate a token
       var user =
           userRepository
               .findByUsername(request.getUsername())
-              .orElseThrow(); // This should ideally be a more specific exception
+              .orElseThrow();
       var jwtToken = jwtService.generateToken(user);
       UserDTO userDTO = new UserDTO();
       userDTO.setUsername(user.getUsername());
@@ -62,7 +63,6 @@ public class AuthenticationService {
       return ResponseEntity.ok(authenticationResponse);
 
     } catch (BadCredentialsException e) {
-      // Handle case where credentials are invalid
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
   }

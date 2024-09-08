@@ -3,12 +3,12 @@ package com.task.archivalLibrary.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "documents")
+@NoArgsConstructor
 public class Document {
 
     @Id
@@ -34,6 +34,17 @@ public class Document {
     @Column(name = "file_path")
     private String filePath;
 
+    @Column(name = "file_name")
+    private String fileName;
 
-    // Getters and Setters
+    public Document(String title, String author, User user, String description, String dataOfPublication, String filePath ,String fileName) {
+        this.title = title;
+        this.author = author;
+        this.user = user;
+        this.description = description;
+        this.dataOfPublication = dataOfPublication;
+        this.filePath = filePath;
+        this.fileName = fileName;
+    }
+
 }
